@@ -1,0 +1,313 @@
+/* Dynamic Note & Task Editor Styling */
+
+.editor-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-amoled);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform var(--transition-normal);
+}
+
+.editor-page.open {
+  transform: translateY(0);
+}
+
+/* Editor Header */
+.editor-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-amoled);
+}
+
+.editor-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Three Dots Context Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  right: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  width: 200px;
+  z-index: 120;
+  display: none;
+  overflow: hidden;
+  animation: scaleIn 0.15s ease-out forwards;
+}
+
+.dropdown-menu.active {
+  display: block;
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--accent-yellow);
+}
+
+.dropdown-item.danger {
+  color: var(--danger);
+}
+
+.dropdown-item.danger:hover {
+  background: var(--danger-alpha);
+}
+
+/* Editor Main Scrollable Canvas */
+.editor-canvas {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.editor-title-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 700;
+  outline: none;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.editor-title-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Note Content Area */
+.editor-body-note {
+  min-height: 150px;
+  outline: none;
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.editor-body-note[placeholder]:empty:before {
+  content: attr(placeholder);
+  color: var(--text-muted);
+  cursor: text;
+}
+
+/* Add Task Action Bar */
+.add-task-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.btn-add-task {
+  background: var(--accent-yellow-alpha);
+  color: var(--accent-yellow);
+  border: 1px solid var(--accent-yellow);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-add-task:hover {
+  background: var(--accent-yellow);
+  color: #000;
+}
+
+/* Interactive Checkboxes Section */
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  transition: opacity var(--transition-fast), border-color var(--transition-fast);
+}
+
+.task-checkbox {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--text-secondary);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-bounce);
+}
+
+.task-item.completed .task-checkbox {
+  background: var(--accent-yellow);
+  border-color: var(--accent-yellow);
+  color: #000;
+}
+
+.task-checkbox svg {
+  width: 14px;
+  height: 14px;
+  display: none;
+}
+
+.task-item.completed .task-checkbox svg {
+  display: block;
+}
+
+.task-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.task-item.completed .task-input {
+  text-decoration: line-through;
+  opacity: 0.5;
+  color: var(--text-muted);
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.task-clock-btn {
+  color: var(--text-muted);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.task-clock-btn.has-reminder {
+  color: var(--info);
+}
+
+.task-delete-btn {
+  color: var(--text-muted);
+  padding: 4px;
+}
+
+.task-delete-btn:hover {
+  color: var(--danger);
+}
+
+/* Rich Toolbar (Bottom Bar of Editor) */
+.editor-toolbar {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+}
+
+.toolbar-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.toolbar-btn:hover, .toolbar-btn.active {
+  background: var(--accent-yellow-alpha);
+  color: var(--accent-yellow);
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-color);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+/* Inserted Media Preview */
+.editor-media-preview {
+  margin: 10px 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  max-height: 250px;
+  position: relative;
+}
+
+.editor-media-preview img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.editor-media-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border-radius: var(--radius-full);
+  width: 28px;
+  height: 28px;
+}
+
+/* Inserted Tables */
+.editor-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.editor-table td, .editor-table th {
+  border: 1px solid var(--border-color);
+  padding: 8px;
+  min-width: 60px;
+  color: var(--text-primary);
+}

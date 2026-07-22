@@ -1,0 +1,284 @@
+/* Layout: Header, Navigation, FAB, Toasts, Modals */
+
+/* Header */
+.main-header {
+  height: 64px;
+  background-color: var(--bg-amoled);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  position: relative;
+  z-index: 50;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--accent-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-yellow);
+}
+
+.brand-logo svg {
+  width: 20px;
+  height: 20px;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.brand-title span {
+  color: var(--accent-yellow);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Collapsible Search Bar */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  transition: width var(--transition-normal);
+}
+
+.search-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  padding: 8px 36px 8px 14px;
+  font-size: 0.9rem;
+  outline: none;
+  width: 100%;
+  transition: border-color var(--transition-fast);
+}
+
+.search-input:focus {
+  border-color: var(--accent-yellow);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.search-clear-btn:hover {
+  color: var(--text-primary);
+}
+
+/* Dynamic Views Area */
+.view-area {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  padding: 16px;
+  background-color: var(--bg-amoled);
+}
+
+.view-section {
+  display: none;
+  height: 100%;
+}
+
+.view-section.active {
+  display: block;
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+  height: 60px;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  z-index: 60;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  padding: 6px 20px;
+  border-radius: var(--radius-md);
+  transition: color var(--transition-fast);
+}
+
+.nav-item svg {
+  width: 22px;
+  height: 22px;
+  transition: transform var(--transition-bounce);
+}
+
+.nav-item.active {
+  color: var(--accent-yellow);
+}
+
+.nav-item.active svg {
+  transform: translateY(-2px) scale(1.1);
+}
+
+/* Floating Action Button (+) */
+.fab-btn {
+  position: fixed;
+  bottom: 80px;
+  right: calc(50vw - 280px + 20px);
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-full);
+  background: var(--accent-yellow);
+  color: #000000;
+  box-shadow: 0 4px 20px var(--accent-yellow-glow);
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-bounce), background-color var(--transition-fast);
+}
+
+@media (max-width: 600px) {
+  .fab-btn {
+    right: 20px;
+  }
+}
+
+.fab-btn:hover {
+  transform: scale(1.08) rotate(90deg);
+  background: var(--accent-yellow-hover);
+}
+
+.fab-btn:active {
+  transform: scale(0.95);
+}
+
+.fab-btn svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 2.5;
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--accent-yellow);
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  font-size: 0.88rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: fadeIn 0.3s ease, slideUp 0.3s ease;
+  pointer-events: auto;
+}
+
+.toast.success {
+  border-color: var(--success);
+}
+
+.toast.danger {
+  border-color: var(--danger);
+}
+
+/* Modal Popup Base */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.9);
+  transition: transform var(--transition-bounce);
+}
+
+.modal-overlay.active .modal-box {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}

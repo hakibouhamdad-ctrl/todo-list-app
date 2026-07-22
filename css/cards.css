@@ -1,0 +1,200 @@
+/* Views & Note/Task Cards Layouts */
+
+/* Group Sections (Aujourd'hui, Ce mois, Plus ancien) */
+.date-group {
+  margin-bottom: 24px;
+}
+
+.date-group-header {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-yellow);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-group-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+/* 1. LIST VIEW MODE */
+.view-container.list-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.view-container.list-mode .note-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  min-height: 56px;
+}
+
+.view-container.list-mode .card-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.view-container.list-mode .card-title {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.95rem;
+}
+
+.view-container.list-mode .card-preview {
+  display: none; /* Hide rich preview in compact list view */
+}
+
+/* 2. CARD VIEW MODE */
+.view-container.card-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.view-container.card-mode .note-card {
+  padding: 16px;
+  min-height: auto;
+}
+
+/* 3. GRID VIEW MODE */
+.view-container.grid-mode {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.view-container.grid-mode .note-card {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+}
+
+/* Base Note Card Component */
+.note-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition-bounce), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.note-card:hover {
+  border-color: var(--border-active);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.note-card.pinned {
+  border-color: var(--accent-yellow);
+}
+
+.note-card.pinned::before {
+  content: '📌';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.8rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.card-preview {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  max-height: 48px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+.card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--accent-yellow);
+  font-weight: 500;
+  font-size: 0.7rem;
+}
+
+.card-badge.reminder-badge {
+  background: rgba(41, 182, 246, 0.15);
+  color: var(--info);
+}
+
+/* Empty State Styling */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.empty-state svg {
+  width: 64px;
+  height: 64px;
+  stroke: var(--text-muted);
+  margin-bottom: 16px;
+  opacity: 0.4;
+}
+
+.empty-state h3 {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.empty-state p {
+  font-size: 0.85rem;
+  max-width: 260px;
+}

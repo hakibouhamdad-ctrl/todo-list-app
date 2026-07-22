@@ -1,0 +1,13 @@
+{
+  "appId": "com.hakibou.todolist",
+  "appName": "To-do LIST",
+  "webDir": "./",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_icon",
+      "iconColor": "#FFD700",
+      "sound": "alarm.mp3"
+    }
+  }
+}

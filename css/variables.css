@@ -1,0 +1,50 @@
+/* AMOLED Dark Mode Design System */
+:root {
+  /* Color Palette */
+  --bg-amoled: #000000;
+  --bg-card: #121212;
+  --bg-card-hover: #1A1A1A;
+  --bg-elevated: #1E1E1E;
+  --bg-glass: rgba(18, 18, 18, 0.85);
+  --bg-input: #181818;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #AAAAAA;
+  --text-muted: #666666;
+  --text-disabled: #444444;
+
+  --accent-yellow: #FFD700;
+  --accent-yellow-hover: #FFE033;
+  --accent-yellow-alpha: rgba(255, 215, 0, 0.15);
+  --accent-yellow-glow: rgba(255, 215, 0, 0.4);
+
+  --danger: #FF4D4D;
+  --danger-alpha: rgba(255, 77, 77, 0.15);
+  --success: #00E676;
+  --success-alpha: rgba(0, 230, 118, 0.15);
+  --info: #29B6F6;
+
+  --border-color: #222222;
+  --border-active: #333333;
+  --border-accent: #FFD700;
+
+  /* Typography */
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Elevation & Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.8);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.9);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.95);
+  --shadow-glow: 0 0 20px var(--accent-yellow-glow);
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* Transitions & Timing */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

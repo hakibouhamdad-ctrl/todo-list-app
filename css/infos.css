@@ -1,0 +1,178 @@
+/* Infos, Anonymous Feedback & Contact Section Styling */
+
+.infos-page {
+  padding-bottom: 40px;
+}
+
+.info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.info-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-yellow);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-card-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* User Guide Accordions / Items */
+.guide-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.guide-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--accent-yellow);
+}
+
+.guide-icon {
+  font-size: 1.2rem;
+}
+
+.guide-content h4 {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.guide-content p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Star Rating System */
+.star-rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.star-btn {
+  font-size: 1.8rem;
+  color: var(--text-disabled);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--transition-bounce), color var(--transition-fast);
+}
+
+.star-btn:hover, .star-btn.active {
+  color: var(--accent-yellow);
+  transform: scale(1.2);
+}
+
+/* Feedback Form Controls */
+.feedback-textarea {
+  width: 100%;
+  height: 100px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  padding: 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  resize: none;
+  margin-bottom: 14px;
+  transition: border-color var(--transition-fast);
+}
+
+.feedback-textarea:focus {
+  border-color: var(--accent-yellow);
+}
+
+.btn-submit-feedback {
+  width: 100%;
+  background: var(--accent-yellow);
+  color: #000;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 12px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px var(--accent-yellow-glow);
+}
+
+.btn-submit-feedback:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Direct Contact Buttons */
+.contact-buttons-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.contact-btn {
+  padding: 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.contact-btn:active {
+  transform: scale(0.96);
+}
+
+.contact-btn.whatsapp {
+  background: #25D366;
+  color: #FFFFFF;
+}
+
+.contact-btn.gmail {
+  background: #EA4335;
+  color: #FFFFFF;
+}
+
+.contact-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Mandatory Footer */
+.app-footer {
+  text-align: center;
+  padding: 24px 12px 10px 12px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  margin-top: 30px;
+}

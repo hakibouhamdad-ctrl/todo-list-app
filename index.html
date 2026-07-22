@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="To-do LIST - Application de prise de notes et gestion de tâches 100% fonctionnelle hors-ligne en Full Black AMOLED.">
+
+  <title>To-do LIST — Notes & Tâches AMOLED</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/editor.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <link rel="stylesheet" href="css/infos.css">
+
+  <!-- Google Analytics 4 (GA4 Tracking sans Firebase) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NB260ET9R8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NB260ET9R8');
+  </script>
+</head>
+<body>
+
+  <div id="app-container">
+
+    <!-- Header Principal -->
+    <header class="main-header">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 11 12 14 22 4" stroke="#FFD700" stroke-width="2.5"></polyline>
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="#FFFFFF"></path>
+          </svg>
+        </div>
+        <h1 class="brand-title">To-do <span>LIST</span></h1>
+      </div>
+
+      <div class="header-actions">
+        <!-- Retractable Search -->
+        <div class="search-container" id="search-container" style="width: 42px;">
+          <button class="icon-btn" id="btn-toggle-search" title="Rechercher">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <input type="text" class="search-input" id="search-input" placeholder="Filtrer notes & tâches..." style="display:none;">
+        </div>
+
+        <!-- View Switcher (3 Lines Icon) -->
+        <button class="icon-btn" id="btn-switch-view" title="Changer de vue (Liste / Cartes / Grille)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Settings Gear Icon -->
+        <button class="icon-btn" id="btn-open-settings" title="Paramètres">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Zone de Vues Dynamiques -->
+    <main class="view-area">
+      
+      <!-- Section 1: Tasks List -->
+      <section class="view-section active" id="sec-tasks">
+        <div id="notes-list-container" class="view-container card-mode">
+          <!-- Filled dynamically via JS -->
+        </div>
+      </section>
+
+      <!-- Section 2: Settings & Widgets -->
+      <section class="view-section settings-page" id="sec-settings">
+        <div class="settings-section">
+          <div class="section-title">⚙️ Préférences d'Affichage</div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Vue par défaut</div>
+              <div class="setting-desc">Choisissez la disposition des cartes au démarrage.</div>
+            </div>
+            <select id="setting-default-view" class="setting-select">
+              <option value="list-mode">Vue Liste Compacte</option>
+              <option value="card-mode" selected>Vue Cartes Spacieuses</option>
+              <option value="grid-mode">Vue Grille 2 Colonnes</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Carousel Widgets Écran d'Accueil -->
+        <div class="settings-section">
+          <div class="section-title">📱 Widgets Écran d'Accueil</div>
+          <p class="setting-desc" style="margin-bottom:12px;">Aperçu interactif des widgets disponibles pour votre écran d'accueil Android (faites défiler horizontalement) :</p>
+          
+          <div class="widget-carousel-container">
+            
+            <!-- Widget 1: Liste Rapide (4x2) -->
+            <div class="widget-preview-card">
+              <div class="widget-header">
+                <div class="widget-title">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                  Tâches du Jour
+                </div>
+                <span class="widget-size-tag">4 x 2</span>
+              </div>
+              <div class="widget-content-mock">
+                <div class="widget-item-mock">
+                  <div class="widget-box-icon">✓</div>
+                  <span>Acheter du pain & lait</span>
+                </div>
+                <div class="widget-item-mock">
+                  <div class="widget-box-icon"></div>
+                  <span>Réunion projet Capacitor 15h</span>
+                </div>
+                <div class="widget-item-mock">
+                  <div class="widget-box-icon"></div>
+                  <span>Appeler le client Gmail</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Widget 2: Note Épinglée (2x2) -->
+            <div class="widget-preview-card">
+              <div class="widget-header">
+                <div class="widget-title">📌 Note Récents</div>
+                <span class="widget-size-tag">2 x 2</span>
+              </div>
+              <div class="widget-content-mock">
+                <div style="font-weight:600; font-size:0.85rem; color:#fff;">Idées V2 To-do LIST</div>
+                <div style="font-size:0.75rem; color:#aaa; line-height:1.3;">- Intégrer les rappels vocalement<br>- Thème AMOLED Personnalisé</div>
+              </div>
+            </div>
+
+            <!-- Widget 3: Quick Add (+) (1x1) -->
+            <div class="widget-preview-card">
+              <div class="widget-header">
+                <div class="widget-title">⚡ Ajout Rapide</div>
+                <span class="widget-size-tag">1 x 1</span>
+              </div>
+              <div class="widget-content-mock" style="align-items:center; justify-content:center; padding:10px 0;">
+                <div style="width:44px; height:44px; border-radius:50%; background:var(--accent-yellow); color:#000; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold;">+</div>
+                <span style="font-size:0.75rem; color:#aaa; margin-top:4px;">Créer Note</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Import / Export Backup -->
+        <div class="settings-section">
+          <div class="section-title">💾 Sauvegarde & Restauration</div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Exporter mes données</div>
+              <div class="setting-desc">Télécharger un fichier de sauvegarde JSON.</div>
+            </div>
+            <button class="btn-add-task" id="btn-export-data">Exporter</button>
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Importer une sauvegarde</div>
+              <div class="setting-desc">Restaurer des notes depuis un fichier JSON.</div>
+            </div>
+            <input type="file" id="input-import-data" accept=".json" style="display:none;">
+            <button class="btn-add-task" onclick="document.getElementById('input-import-data').click()">Importer</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Infos, Feedback & Contact -->
+      <section class="view-section infos-page" id="sec-infos">
+        
+        <!-- About Card -->
+        <div class="info-card">
+          <div class="info-card-title">📱 À propos de To-do LIST</div>
+          <p class="info-card-text">
+            To-do LIST est une application hybride de gestion de notes et tâches 100% hors-ligne, optimisée avec un design <strong>Full Black AMOLED</strong> pour économiser votre batterie et vous offrir une expérience visuelle ultra fluide.
+          </p>
+        </div>
+
+        <!-- User Guide -->
+        <div class="info-card">
+          <div class="info-card-title">📖 Guide d'utilisation</div>
+          <div class="guide-list">
+            <div class="guide-item">
+              <div class="guide-icon">➕</div>
+              <div class="guide-content">
+                <h4>Création Rapide</h4>
+                <p>Cliquez sur le bouton jaune + pour créer une note. Vous pouvez basculer entre note texte et liste de tâches à cocher à tout moment.</p>
+              </div>
+            </div>
+            <div class="guide-item">
+              <div class="guide-icon">⏰</div>
+              <div class="guide-content">
+                <h4>Alarmes & Rappels</h4>
+                <p>Cliquez sur l'icône horloge à côté de chaque tâche ou dans le menu de la note pour programmer une notification native Android.</p>
+              </div>
+            </div>
+            <div class="guide-item">
+              <div class="guide-icon">🔍</div>
+              <div class="guide-content">
+                <h4>Recherche & Vues</h4>
+                <p>Basculez facilement entre les vues Liste, Cartes et Grille via l'icône à 3 traits dans le header.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulaire d'Avis Anonymes EmailJS -->
+        <div class="info-card">
+          <div class="info-card-title">⭐ Donner votre avis (Anonyme)</div>
+          <p class="info-card-text">
+            Votre opinion nous aide à améliorer l'application. Aucun compte ni adresse e-mail n'est requis.
+          </p>
+
+          <div class="star-rating-container" id="star-rating">
+            <button class="star-btn" data-star="1">★</button>
+            <button class="star-btn" data-star="2">★</button>
+            <button class="star-btn" data-star="3">★</button>
+            <button class="star-btn" data-star="4">★</button>
+            <button class="star-btn" data-star="5">★</button>
+          </div>
+
+          <textarea class="feedback-textarea" id="feedback-message" placeholder="Écrivez votre suggestion ou votre avis ici..."></textarea>
+
+          <button class="btn-submit-feedback" id="btn-submit-feedback">
+            <span>Valider & Envoyer</span>
+          </button>
+        </div>
+
+        <!-- Redirections Directes WhatsApp & Gmail -->
+        <div class="info-card">
+          <div class="info-card-title">💬 Contact Direct</div>
+          <p class="info-card-text">Pour toute question ou demande de fonctionnalité personnalisée :</p>
+          <div class="contact-buttons-container">
+            <a href="https://wa.me/22942620879" target="_blank" class="contact-btn whatsapp">
+              <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.124 4.108 4.185-1.097z"/></svg>
+              <span>WhatsApp</span>
+            </a>
+
+            <a href="mailto:hakibouhamdad@gmail.com" class="contact-btn gmail">
+              <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L12 9.545l8.073-6.052c1.618-1.214 3.927-.059 3.927 1.964z"/></svg>
+              <span>Gmail</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mandatory Footer -->
+        <footer class="app-footer">
+          © To-do LIST 2026. Tous droits réservés | Développé par HAKIBOU Hamdad
+        </footer>
+
+      </section>
+
+    </main>
+
+    <!-- Floating Action Button (+) -->
+    <button class="fab-btn" id="btn-fab-add" title="Nouveau projet / Note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </button>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" id="nav-tasks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 11 12 14 22 4"></polyline>
+          <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+        </svg>
+        <span>Tasks</span>
+      </button>
+
+      <button class="nav-item" id="nav-infos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>Infos</span>
+      </button>
+    </nav>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Page Éditeur Fullscreen (Ouverte au clic sur + ou sur une note) -->
+    <div class="editor-page" id="editor-page">
+      
+      <!-- Editor Header -->
+      <div class="editor-header">
+        <button class="icon-btn" id="btn-editor-back" title="Retour">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+
+        <div class="editor-header-actions">
+          <button class="icon-btn" id="btn-editor-undo" title="Annuler">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7v6h6"></path>
+              <path d="M21 17a9 9 0 00-9-9 9 9 0 00-6 2.3L3 13"></path>
+            </svg>
+          </button>
+
+          <button class="icon-btn" id="btn-editor-redo" title="Rétablir">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 7v6h-6"></path>
+              <path d="M3 17a9 9 0 019-9 9 9 0 016 2.3l3 2.7"></path>
+            </svg>
+          </button>
+
+          <!-- Menu Trois Points (⋮) -->
+          <button class="icon-btn" id="btn-editor-menu" title="Menu options">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <circle cx="12" cy="5" r="2"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+              <circle cx="12" cy="19" r="2"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dropdown Context Menu (⋮) -->
+      <div class="dropdown-menu" id="editor-dropdown">
+        <button class="dropdown-item" id="menu-opt-pin">📌 Épingler la note</button>
+        <button class="dropdown-item" id="menu-opt-reminder">⏰ Programmer un rappel</button>
+        <button class="dropdown-item" id="menu-opt-share">📤 Partager la note</button>
+        <button class="dropdown-item danger" id="menu-opt-delete">🗑️ Supprimer</button>
+      </div>
+
+      <!-- Editor Canvas Area -->
+      <div class="editor-canvas">
+        <input type="text" class="editor-title-input" id="editor-title" placeholder="Titre du projet / note...">
+
+        <div class="editor-body-note" id="editor-note-body" contenteditable="true" placeholder="Rédigez votre note ici..."></div>
+
+        <div class="add-task-bar">
+          <button class="btn-add-task" id="btn-add-task-item">
+            <span>+ Ajouter une tâche à cocher</span>
+          </button>
+        </div>
+
+        <div class="tasks-container" id="editor-tasks-container"></div>
+      </div>
+
+      <!-- Editor Rich Formatting Toolbar -->
+      <div class="editor-toolbar">
+        <button class="toolbar-btn" id="tb-bold" title="Gras"><b>B</b></button>
+        <button class="toolbar-btn" id="tb-italic" title="Italique"><i>I</i></button>
+        <button class="toolbar-btn" id="tb-underline" title="Souligné"><u>U</u></button>
+        
+        <div class="toolbar-divider"></div>
+
+        <button class="toolbar-btn" id="tb-align-left" title="Aligner à gauche">←</button>
+        <button class="toolbar-btn" id="tb-align-center" title="Aligner au centre">↔</button>
+        <button class="toolbar-btn" id="tb-align-right" title="Aligner à droite">→</button>
+
+        <div class="toolbar-divider"></div>
+
+        <button class="toolbar-btn" id="tb-ul" title="Liste à puces">•</button>
+        <button class="toolbar-btn" id="tb-ol" title="Liste numérotée">1.</button>
+
+        <div class="toolbar-divider"></div>
+
+        <button class="toolbar-btn" id="tb-img" title="Importer une image">📷</button>
+        <button class="toolbar-btn" id="tb-ocr" title="Reconnaissance de texte OCR">🔍</button>
+        <button class="toolbar-btn" id="tb-voice" title="Dictée vocale">🎤</button>
+        <button class="toolbar-btn" id="tb-table" title="Insérer un tableau">📊</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Main JavaScript App Loader (ES Modules) -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
