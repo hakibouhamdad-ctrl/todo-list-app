@@ -24,18 +24,22 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Prepare Web Distribution Folder
+      - name: Prepare Web Folder
         run: |
           mkdir -p www
-          cp -r index.html manifest.json sw.js css js assets www/
+          cp -r index.html manifest.json sw.js css js www/ 2>/dev/null || true
+          cp -r assets www/ 2>/dev/null || true
 
-      - name: Install Dependencies & Setup Capacitor Android
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Setup Capacitor Android
         run: |
-          npm install
           npx cap add android || true
-          npx cap sync
+          npx cap copy android || true
+          npx cap update android || true
 
-      - name: Build Android APK with Gradle
+      - name: Build Android APK
         run: |
           cd android
           chmod +x gradlew
