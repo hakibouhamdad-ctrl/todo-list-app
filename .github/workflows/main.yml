@@ -2,7 +2,7 @@ name: Build Android APK (Cloud Build)
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, principal ]
   workflow_dispatch:
 
 jobs:
@@ -11,15 +11,15 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Set up Java JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
@@ -27,7 +27,7 @@ jobs:
       - name: Install Dependencies & Setup Capacitor Android
         run: |
           npm install
-          npx cap add android
+          npx cap add android || true
           npx cap sync
 
       - name: Build Android APK with Gradle
@@ -37,7 +37,7 @@ jobs:
           ./gradlew assembleDebug
 
       - name: Upload APK Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: To-do-LIST-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
