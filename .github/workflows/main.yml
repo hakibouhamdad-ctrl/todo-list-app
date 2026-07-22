@@ -16,13 +16,18 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Set up Java JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
+
+      - name: Prepare Web Distribution Folder
+        run: |
+          mkdir -p www
+          cp -r index.html manifest.json sw.js css js assets www/
 
       - name: Install Dependencies & Setup Capacitor Android
         run: |
